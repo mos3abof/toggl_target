@@ -39,7 +39,6 @@ for entry in time_entries['data']:
 	total_seconds_tracked += entry['duration']
 
 achieved_hours = (total_seconds_tracked / 60.0) / 60
-print achieved_hours
 
 
 #salary 				= float(raw_input('Enter your Salary : '))
@@ -67,9 +66,9 @@ required_work_hours_per_day = left_to_required / days_left_in_month
 
 
 
-
+print "So far you have tracked {}".format('{0:.2f}'.format(achieved_hours))
 print "Time left till dealine is : {}".format(delta)
 print "You shold at least achieve {} hours and ideally {} hours".format(left_to_minimum, left_to_required)
 print "This means you should work from {} to {} hours per day till the deadline".format(minimum_work_hours_per_day, required_work_hours_per_day)
-print "So far you have achieved {} % of your target".format(achieved_percentage * 100)
+print "So far you have achieved {} % of your target".format('{0:.2f}'.format(achieved_percentage * 100))
 #print "So far you have earned {} % of your salary which is {} LE".format('{0:.2f}'.format(achieved_percentage * 100), '{0:.2f}'.format(earned_salary))
