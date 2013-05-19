@@ -66,7 +66,7 @@ required_work_hours_per_day = left_to_required / days_left_in_month
 
 
 
-print "So far you have tracked {}".format('{0:.2f}'.format(achieved_hours))
+print "So far you have tracked {} hours".format('{0:.2f}'.format(achieved_hours))
 print "Time left till dealine is : {}".format(delta)
 print "You shold at least achieve {} hours and ideally {} hours".format(left_to_minimum, left_to_required)
 print "This means you should work from {} to {} hours per day till the deadline".format(minimum_work_hours_per_day, required_work_hours_per_day)
