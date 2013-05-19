@@ -31,7 +31,7 @@ toggl_url = 'https://www.toggl.com/api/v6/time_entries.json?start_date=20{}-{}-{
 headers = {'content-type': 'application/json'}
 
 print "Connecting to Toggl, hang on!"
-r = requests.get(toggl_url, headers=headers, auth=HTTPBasicAuth(API_TOKEN, 'api_token'))
+r = requests.get(toggl_url, headers=headers, auth=HTTPBasicAuth(config.API_TOKEN, 'api_token'))
 time_entries = r.json()
 
 total_seconds_tracked = 0
