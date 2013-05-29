@@ -1,2 +1,12 @@
-API_TOKEN = 'ADD YOUR API TOKEN HERE'
+# Toggl API Token
+API_TOKEN 		= 'ADD YOUR API TOKEN HERE'
+
+# Target Configurations
+WORKING_HOURS_PER_DAY	= 8
+WORKING_DAYS		= 5
+TOLERANCE_PERCENTAGE	= 0.1
+
+# Salary Configurtions
+SHOW_SALARY		= False
+SALARY			= 0
 
