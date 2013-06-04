@@ -47,16 +47,16 @@ achieved_percentage	= t.get_achieved_percentage()
 
 
 print "So far you have tracked {} hours".format('{0:.2f}'.format(tracked_hours))
-print "Business days left till deadline : {}".format(w.get_business_days_left_count())
+print "\nBusiness days left till deadline : {}".format(w.get_business_days_left_count())
 print "Total days left till deadline : {}".format(w.get_days_left_count())
-print "Rquired working hours for this month : {}".format(w.get_required_hours_this_month())
-print "To achieve the minimum you should log {} hours every business day or log {} hours every day".format(
+print "\nRquired working hours for this month : {}".format(w.get_required_hours_this_month())
+print "\nTo achieve the minimum :\n\tyou should log {} hours every business day \n\tor log {} hours every day".format(
 																			'{0:.2f}'.format(t.get_minimum_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[0]), 
 																			'{0:.2f}'.format(t.get_minimum_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[1])
 																		)
-print "To achieve the required you should log {} hours every business day or log {} hours every day".format(
+print "\nTo achieve the required :\n\tyou should log {} hours every business day \n\tor log {} hours every day".format(
 																			'{0:.2f}'.format(t.get_required_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[0]), 
 																			'{0:.2f}'.format(t.get_required_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[1])
 																		)
-print "So far you have achieved {} % of your target".format('{0:.2f}'.format(achieved_percentage * 100))
+print "\nSo far you have achieved {} % of your target".format('{0:.2f}'.format(achieved_percentage * 100))
 
