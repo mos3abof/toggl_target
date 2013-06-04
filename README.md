@@ -9,4 +9,4 @@ You will need to install `requests` and `dateutil` python libraries to be able t
 
 To get started, rename `config.py-example` to `config.py` and edit the values in it. 
 
-Your Toggl token API can be found in your account's settings.
+Your Toggl  API token can be found in your account's settings.
