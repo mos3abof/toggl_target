@@ -13,7 +13,7 @@ Your Toggl  API token can be found in your account's settings.
 A sample output looks like this :
 
 ```
->>> python toggl_target.py 
+$ python toggl_target.py 
 Hi
 Checking Internet connectivity...
 Internet seems fine!
