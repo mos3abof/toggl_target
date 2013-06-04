@@ -2,8 +2,6 @@
 # -*- coding: utf-8 -*-
 #@author Mosab Ahmad <mosab.ahmad@gmail.com>
 
-import 	calendar
-
 from dateutil.rrule import *
 from dateutil.parser import *
 from dateutil.relativedelta import *
