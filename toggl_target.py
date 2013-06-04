@@ -2,85 +2,61 @@
 # -*- coding: utf-8 -*-
 #@author Mosab Ahmad <mosab.ahmad@gmail.com>
 
-import 	sys
-
-from 	datetime import datetime, date, time
-import 	calendar
-
-import 	re
-
-import 	requests
-from 	requests.auth import HTTPBasicAuth
-import 	json
-
-import 	config
+import sys
+import config
+import traceback
 
 from togglapi import api
 from toggltarget import target
+from workingtime import workingtime
 
-current_day 	= datetime.now().strftime("%d")
-current_month 	= datetime.now().strftime("%m")
-current_year 	= datetime.now().strftime("%y")
-
-
-last_day_in_month	= int(calendar.monthrange(int(current_year), int(current_month))[1])
-days_left_in_month 	= last_day_in_month - int(current_day)
-
-_deadline = "{}/{}/{} 23:59".format(last_day_in_month, current_month, current_year)
+w = workingtime.WorkingTime()
+a = api.TogglAPI(config.API_TOKEN)
+t = target.Target()
 
 
-toggl_url = 'https://www.toggl.com/api/v6/time_entries.json?start_date=20{}-{}-{}T00%3A00%3A00%2B02%3A00&end_date=20{}-{}-{}T23%3A59%3A59%2B02%3A00'.format(current_year, current_month, 1, current_year, current_month, last_day_in_month)
-headers = {'content-type': 'application/json'}
+t.set_required_hours(w.get_required_hours_this_month())
+t.set_tolerance(config.TOLERANCE_PERCENTAGE)
+
 
 print "Hi"
-print "I am trying to connect to Toggl, hang on!"
-try:
-	time_entries = requests.get(toggl_url, headers=headers, auth=HTTPBasicAuth(config.API_TOKEN, 'api_token')).json()
-except requests.exceptions.ConnectionError:
-	print "OMG! Either there is no internet connection, or Toggl is unavailable for some mysterious reason!"
+print "Checking Internet connectivity..."
+if not a.internet_on():
+	print "OMG! There is no internet connection!"
 	print "Good Bye Cruel World!"
 	sys.exit()
+print "Internet seems fine!"
+print "I am trying to connect to Toggl, hang on!"
+try:
+	tracked_hours = a.get_hours_tracked(start_date = str(w.get_month_start_iso()), end_date = str(w.get_now_iso()))
+except:
+	print "OMG! Toggle request failed for some mysterious reason!"
+	print "Good Bye Cruel World!"
+	print traceback.format_exc()
+	sys.exit()
 
-total_seconds_tracked = 0
-for entry in time_entries['data']:
-	total_seconds_tracked += entry['duration']
-
-achieved_hours = (total_seconds_tracked / 60.0) / 60
-
-
-#salary 				= float(raw_input('Enter your Salary : '))
-
-required_hours		= 173.0
-tolerance			= 0.1
-minimum_hours 		= required_hours - (tolerance * required_hours)
-
-
-left_to_minimum		= minimum_hours - achieved_hours
-left_to_required	= required_hours - achieved_hours
-
-# Setting to 0 if passed
-if achieved_hours >= minimum_hours :
-	left_to_minimum		= 0
-if achieved_hours > required_hours :
-	left_to_required	= 0
-
-achieved_percentage	= achieved_hours / required_hours
-
-#earned_salary 		= achieved_percentage * salary
-
-now 		= datetime.now()
-deadline 	= datetime.strptime(_deadline, "%d/%m/%y %H:%M")
-
-delta = deadline - now
-
-minimum_work_hours_per_day = left_to_minimum / days_left_in_month
-required_work_hours_per_day = left_to_required / days_left_in_month
+t.set_achieved_hours(tracked_hours)
 
 
 
-print "So far you have tracked {} hours".format('{0:.2f}'.format(achieved_hours))
-print "Time left till dealine is : {}".format(delta)
-print "You should at least achieve {} hours and ideally {} hours".format(left_to_minimum, left_to_required)
-print "This means you should work from {} to {} hours per day till the deadline".format(minimum_work_hours_per_day, required_work_hours_per_day)
+left_to_minimum		= t.get_left_to_minimum()
+left_to_required	= t.get_left_to_required()
+
+
+achieved_percentage	= t.get_achieved_percentage()
+
+
+print "So far you have tracked {} hours".format('{0:.2f}'.format(tracked_hours))
+print "Business days left till deadline : {}".format(w.get_business_days_left_count())
+print "Total days left till deadline : {}".format(w.get_days_left_count())
+print "Rquired working hours for this month : {}".format(w.get_required_hours_this_month())
+print "To achieve the minimum you should log {} hours every business day or log {} hours every day".format(
+																			'{0:.2f}'.format(t.get_minimum_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[0]), 
+																			'{0:.2f}'.format(t.get_minimum_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[1])
+																		)
+print "To achieve the required you should log {} hours every business day or log {} hours every day".format(
+																			'{0:.2f}'.format(t.get_required_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[0]), 
+																			'{0:.2f}'.format(t.get_required_daily_hours(w.get_business_days_left_count(), w.get_days_left_count())[1])
+																		)
 print "So far you have achieved {} % of your target".format('{0:.2f}'.format(achieved_percentage * 100))
-#print "So far you have earned {} % of your salary which is {} LE".format('{0:.2f}'.format(achieved_percentage * 100), '{0:.2f}'.format(earned_salary))
+
