@@ -9,7 +9,8 @@ To get started, rename `config.py-example` to `config.py` and edit the values in
 
 Your Toggl  API token can be found in your account's settings.
 
-
+Example
+-------
 A sample output looks like this :
 
 ```bash
@@ -35,6 +36,9 @@ To achieve the required :
 
 So far you have achieved 8.89 % of your target
 ```
+
+License
+-------
 
 ```
 This program is free software: you can redistribute it and/or modify
