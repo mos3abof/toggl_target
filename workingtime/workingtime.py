@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #@author Mosab Ahmad <mosab.ahmad@gmail.com>
 
-from dateutil.rrule import rrule, SA, SU, MO, TU, WE, TH, FR
+from dateutil.rrule import rrule, SA, SU, MO, TU, WE, TH, FR, DAILY
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
@@ -56,7 +56,7 @@ class WorkingTime(object):
 
 	@property
 	def required_hours_this_month(self):
-		return self.get_total_business_days_count() * int(self.daily_hours)
+		return self.total_business_days_count * self.daily_hours
 
 if __name__ == '__main__':
 	import doctest
