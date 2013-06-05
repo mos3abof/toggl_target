@@ -2,79 +2,60 @@
 # -*- coding: utf-8 -*-
 #@author Mosab Ahmad <mosab.ahmad@gmail.com>
 
-from dateutil.rrule import *
-from dateutil.parser import *
-from dateutil.relativedelta import *
-from datetime import datetime, date, time
+from dateutil.rrule import rrule, SA, SU, MO, TU, WE, TH, FR
+from dateutil.relativedelta import relativedelta
+from datetime import datetime
+
+# TODO: Should we move these to config.py?
+BUSINESS_DAYS = (SA, SU, MO, TU, WE)
+WEEK_DAYS = (SA, SU, MO, TU, WE, TH, FR)
 
 class WorkingTime(object):
 	"""Time and date calculations for working hours and days"""
-	def __init__(self):
-		self.daily_hours = 8
-
-	def set_deadline(self):
-		pass
-
-	def set_daily_hours(self, daily_hours):
+	def __init__(self, daily_hours):
 		self.daily_hours = daily_hours
 
-	def get_now(self):
-		return datetime.now()+relativedelta(microsecond=0)
+	@property
+	def now(self):
+		return datetime.now() + relativedelta(microsecond=0)
 
-	def get_month_start(self):
-		today = self.get_now()
-		return today+relativedelta(day=1, hour=0, minute=0, second=0, microsecond=0)
+	@property
+	def month_start(self):
+		return self.now + relativedelta(day=1, hour=0, minute=0, second=0, microsecond=0)
 
-	def get_month_end(self):
-		today = self.get_now()
-		return today+relativedelta(day=31, hour=11, minute=59, second=59, microsecond=0)
+	@property
+	def month_end(self):
+		return self.now + relativedelta(day=31, hour=11, minute=59, second=59, microsecond=0)
 
+	@property
+	def total_business_days_count(self):
+		return rrule(DAILY, dtstart=self.month_start, until=self.month_end, byweekday=BUSINESS_DAYS).count()
 
-	def get_total_business_days_count(self):
-		firstday = self.get_month_start()
-		lastday  = self.get_month_end()
-		return len(list(rrule(DAILY, dtstart=firstday, until=lastday, byweekday=(SA, SU, MO, TU, WE))))
+	@property
+	def total_days_count(self):
+		return rrule(DAILY, dtstart=self.month_start, until=self.month_end, byweekday=WEEK_DAYS).count()
 
-	def get_total_days_count(self):
-		firstday = self.get_month_start()
-		lastday  = self.get_month_end()
-		return len(list(rrule(DAILY, dtstart=firstday, until=lastday, byweekday=(SA, SU, MO, TU, WE, TH, FR))))
+	@property
+	def business_days_left_count(self):
+		return rrule(DAILY, dtstart=self.now, until=self.month_end, byweekday=BUSINESS_DAYS).count()
 
-	def get_business_days_left_count(self):
-		today = self.get_now()
-		lastday = self.get_month_end()
-		return len(list(rrule(DAILY, dtstart=today, until=lastday, byweekday=(SA, SU, MO, TU, WE))))
+	@property
+	def days_left_count(self):
+		return rrule(DAILY, dtstart=self.now, until=self.month_end, byweekday=WEEK_DAYS).count()
 
-
-	def get_days_left_count(self):
-		today = self.get_now()
-		lastday = self.get_month_end()
-		return len(list(rrule(DAILY, dtstart=today, until=lastday, byweekday=(SA, SU, MO, TU, WE, TH, FR))))
-
-	def get_business_days_elapsed_count(self):
-		firstday = self.get_month_start()
-		today = self.get_now()
-		return len(list(rrule(DAILY, dtstart=firstday, until=today, byweekday=(SA, SU, MO, TU, WE))))
+	@property
+	def business_days_elapsed_count(self):
+		return rrule(DAILY, dtstart=self.month_start, until=self.now, byweekday=BUSINESS_DAYS).count()
 
 
-	def get_days_elapsed_count(self):
-		firstday = self.get_month_start()
-		today = self.get_now()
-		return len(list(rrule(DAILY, dtstart=firstday, until=today, byweekday=(SA, SU, MO, TU, WE, TH, FR))))
+	@property
+	def days_elapsed_count(self):
+		firstday = self.month_start
+		today = self.now
+		return rrule(DAILY, dtstart=firstday, until=today, byweekday=WEEK_DAYS).count()
 
-	def get_datetime_iso(self, t):
-		return t.isoformat()
-
-	def get_now_iso(self):
-		return self.get_datetime_iso(self.get_now())
-
-	def get_month_start_iso(self):
-		return self.get_datetime_iso(self.get_month_start())
-
-	def get_month_end_iso(self):
-		return self.get_datetime_iso(self.get_month_end())
-
-	def get_required_hours_this_month(self):
+	@property
+	def required_hours_this_month(self):
 		return self.get_total_business_days_count() * int(self.daily_hours)
 
 if __name__ == '__main__':
