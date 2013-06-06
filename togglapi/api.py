@@ -55,7 +55,7 @@ class TogglAPI(object):
 	def get_hours_tracked(self, start_date, end_date):
 		time_entries = self.get_time_entries(start_date = start_date.isoformat(), end_date = end_date.isoformat())
 
-		total_seconds_tracked = sum(entry['duration'] for entry in time_entries['data'])
+		total_seconds_tracked = sum(max(entry['duration'],0) for entry in time_entries['data'])
 
 		return (total_seconds_tracked / 60.0) / 60.0
 
