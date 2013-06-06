@@ -6,9 +6,6 @@ from dateutil.rrule import rrule, SA, SU, MO, TU, WE, TH, FR, DAILY
 from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
-# TODO: Should we move these to config.py?
-
-
 class WorkingTime(object):
 	"""Time and date calculations for working hours and days"""
 	def __init__(self, daily_hours, BUSINESS_DAYS, WEEK_DAYS):

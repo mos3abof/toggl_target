@@ -21,12 +21,12 @@ class TogglAPI(object):
 		Default section is "time_entries" which evaluates to "time_entries.json"
 
 		>>> t = TogglAPI('_SECRET_TOGGLE_API_TOKEN_')
-		>>> t.make_url(section='time_entries', params = {})
-		'https://www.toggl.com/api/v6/time_entries'
+		>>> t._make_url(section='time_entries', params = {})
+		'https://www.toggl.com/api/v6/time_entries.json'
 
 		>>> t = TogglAPI('_SECRET_TOGGLE_API_TOKEN_')
-		>>> t.make_url(section='time_entries', params = {'start_date' : '2010-02-05T15:42:46+02:00', 'end_date' : '2010-02-12T15:42:46+02:00'})
-		'https://www.toggl.com/api/v6/time_entries?start_date=2010-02-05T15%3A42%3A46%2B02%3A00&end_date=2010-02-12T15%3A42%3A46%2B02%3A00'
+		>>> t._make_url(section='time_entries', params = {'start_date' : '2010-02-05T15:42:46+02:00', 'end_date' : '2010-02-12T15:42:46+02:00'})
+		'https://www.toggl.com/api/v6/time_entries.json?start_date=2010-02-05T15%3A42%3A46%2B02%3A00&end_date=2010-02-12T15%3A42%3A46%2B02%3A00'
 		"""
 
 		url = 'https://www.toggl.com/api/v6/{}.json'.format(section)
@@ -35,6 +35,8 @@ class TogglAPI(object):
 		return url
 
 	def _query(self, url, method):
+		"""Performs the actual call to Toggl API"""
+
 		url = url
 		headers = {'content-type': 'application/json'}
 		
@@ -47,15 +49,18 @@ class TogglAPI(object):
 
 	## Time Entry functions
 	def get_time_entries(self, start_date='', end_date=''):
+		"""Get Time Entries JSON object from Toggl"""
+
 		url = self._make_url(section = 'time_entries', params = {'start_date' : start_date, 'end_date': end_date})
 		r = self._query(url = url, method = 'GET')
 		return r.json()
 
 
 	def get_hours_tracked(self, start_date, end_date):
+		"""Count the total tracked hours excluding any RUNNING real time tracked time entries"""
 		time_entries = self.get_time_entries(start_date = start_date.isoformat(), end_date = end_date.isoformat())
 
-		total_seconds_tracked = sum(max(entry['duration'],0) for entry in time_entries['data'])
+		total_seconds_tracked = sum(max(entry['duration'], 0) for entry in time_entries['data'])
 
 		return (total_seconds_tracked / 60.0) / 60.0
 
