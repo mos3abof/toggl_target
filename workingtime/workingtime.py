@@ -7,13 +7,14 @@ from dateutil.relativedelta import relativedelta
 from datetime import datetime
 
 # TODO: Should we move these to config.py?
-BUSINESS_DAYS = (SA, SU, MO, TU, WE)
-WEEK_DAYS = (SA, SU, MO, TU, WE, TH, FR)
+
 
 class WorkingTime(object):
 	"""Time and date calculations for working hours and days"""
-	def __init__(self, daily_hours):
-		self.daily_hours = daily_hours
+	def __init__(self, daily_hours, BUSINESS_DAYS, WEEK_DAYS):
+		self.daily_hours 	= daily_hours
+		self.BUSINESS_DAYS 	= BUSINESS_DAYS
+		self.WEEK_DAYS		= WEEK_DAYS
 
 	@property
 	def now(self):
@@ -29,30 +30,30 @@ class WorkingTime(object):
 
 	@property
 	def total_business_days_count(self):
-		return rrule(DAILY, dtstart=self.month_start, until=self.month_end, byweekday=BUSINESS_DAYS).count()
+		return rrule(DAILY, dtstart=self.month_start, until=self.month_end, byweekday=self.BUSINESS_DAYS).count()
 
 	@property
 	def total_days_count(self):
-		return rrule(DAILY, dtstart=self.month_start, until=self.month_end, byweekday=WEEK_DAYS).count()
+		return rrule(DAILY, dtstart=self.month_start, until=self.month_end, byweekday=self.WEEK_DAYS).count()
 
 	@property
 	def business_days_left_count(self):
-		return rrule(DAILY, dtstart=self.now, until=self.month_end, byweekday=BUSINESS_DAYS).count()
+		return rrule(DAILY, dtstart=self.now, until=self.month_end, byweekday=self.BUSINESS_DAYS).count()
 
 	@property
 	def days_left_count(self):
-		return rrule(DAILY, dtstart=self.now, until=self.month_end, byweekday=WEEK_DAYS).count()
+		return rrule(DAILY, dtstart=self.now, until=self.month_end, byweekday=self.WEEK_DAYS).count()
 
 	@property
 	def business_days_elapsed_count(self):
-		return rrule(DAILY, dtstart=self.month_start, until=self.now, byweekday=BUSINESS_DAYS).count()
+		return rrule(DAILY, dtstart=self.month_start, until=self.now, byweekday=self.BUSINESS_DAYS).count()
 
 
 	@property
 	def days_elapsed_count(self):
 		firstday = self.month_start
 		today = self.now
-		return rrule(DAILY, dtstart=firstday, until=today, byweekday=WEEK_DAYS).count()
+		return rrule(DAILY, dtstart=firstday, until=today, byweekday=self.WEEK_DAYS).count()
 
 	@property
 	def required_hours_this_month(self):

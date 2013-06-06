@@ -20,7 +20,7 @@ def internet_on():
 		return False
 
 def main():
-	w = workingtime.WorkingTime(config.WORKING_HOURS_PER_DAY)
+	w = workingtime.WorkingTime(config.WORKING_HOURS_PER_DAY, config.BUSINESS_DAYS, config.WEEK_DAYS)
 	a = api.TogglAPI(config.API_TOKEN)
 	t = target.Target()
 
