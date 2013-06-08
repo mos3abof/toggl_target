@@ -31,7 +31,7 @@ def main():
 		print "Good Bye Cruel World!"
 		sys.exit()
 	print "Internet seems fine!"
-	print "I am trying to connect to Toggl, hang on!"
+	print "I am trying to connect to Toggl, hang on!\n"
 	try:
 		t.achieved_hours = a.get_hours_tracked(start_date = w.month_start, end_date = w.now)
 	except:
