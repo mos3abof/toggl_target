@@ -23,7 +23,7 @@ def internet_on():
 
 def main():
     w = workingtime.WorkingTime(config.WORKING_HOURS_PER_DAY, config.BUSINESS_DAYS, config.WEEK_DAYS)
-    a = api.TogglAPI(config.API_TOKEN)
+    a = api.TogglAPI(config.API_TOKEN, config.TIMEZONE)
     t = target.Target()
 
     print "Hi"

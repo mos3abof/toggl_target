@@ -11,8 +11,9 @@ from requests.auth import HTTPBasicAuth
 class TogglAPI(object):
     """A wrapper for Toggl Api"""
 
-    def __init__(self, api_token):
+    def __init__(self, api_token, timezone):
         self.api_token = api_token
+        self.timezone  = timezone
 
     def _make_url(self, section='time_entries', params={}):
         """Constructs and returns an api url to call with the section of the API to be called
@@ -21,14 +22,14 @@ class TogglAPI(object):
 
         >>> t = TogglAPI('_SECRET_TOGGLE_API_TOKEN_')
         >>> t._make_url(section='time_entries', params = {})
-        'https://www.toggl.com/api/v6/time_entries.json'
+        'https://www.toggl.com/api/v8/time_entries'
 
         >>> t = TogglAPI('_SECRET_TOGGLE_API_TOKEN_')
         >>> t._make_url(section='time_entries', params = {'start_date' : '2010-02-05T15:42:46+02:00', 'end_date' : '2010-02-12T15:42:46+02:00'})
-        'https://www.toggl.com/api/v6/time_entries.json?start_date=2010-02-05T15%3A42%3A46%2B02%3A00&end_date=2010-02-12T15%3A42%3A46%2B02%3A00'
+        'https://www.toggl.com/api/v8/time_entries?start_date=2010-02-05T15%3A42%3A46%2B02%3A00%2B02%3A00&end_date=2010-02-12T15%3A42%3A46%2B02%3A00%2B02%3A00'
         """
 
-        url = 'https://www.toggl.com/api/v6/{}.json'.format(section)
+        url = 'https://www.toggl.com/api/v8/{}'.format(section)
         if len(params) > 0:
             url = url + '?{}'.format(urlencode(params))
         return url
@@ -47,10 +48,10 @@ class TogglAPI(object):
             raise ValueError('Undefined HTTP method "{}"'.format(method))
 
     ## Time Entry functions
-    def get_time_entries(self, start_date='', end_date=''):
+    def get_time_entries(self, start_date='', end_date='', timezone=''):
         """Get Time Entries JSON object from Toggl"""
 
-        url = self._make_url(section='time_entries', params={'start_date': start_date, 'end_date': end_date})
+        url = self._make_url(section='time_entries', params={'start_date': start_date+self.timezone, 'end_date': end_date+self.timezone})
         r = self._query(url=url, method='GET')
         return r.json()
 
@@ -58,7 +59,7 @@ class TogglAPI(object):
         """Count the total tracked hours excluding any RUNNING real time tracked time entries"""
         time_entries = self.get_time_entries(start_date=start_date.isoformat(), end_date=end_date.isoformat())
 
-        total_seconds_tracked = sum(max(entry['duration'], 0) for entry in time_entries['data'])
+        total_seconds_tracked = sum(max(entry['duration'], 0) for entry in time_entries)
 
         return (total_seconds_tracked / 60.0) / 60.0
 
