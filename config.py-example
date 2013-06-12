@@ -1,18 +1,18 @@
 # Toggl API Token
-API_TOKEN 		= 'ADD YOUR API TOKEN HERE'
+API_TOKEN             = 'ADD YOUR API TOKEN HERE'
 
 #Number Precision
-PRECISION = 2
+PRECISION             = 2
 
 # Target Configurations
-WORKING_HOURS_PER_DAY	= 8
-WORKING_DAYS			= 5
-TOLERANCE_PERCENTAGE	= 0.1
+WORKING_HOURS_PER_DAY = 8
+WORKING_DAYS          = 5
+TOLERANCE_PERCENTAGE  = 0.1
 
 # Timezone
-TIMEZONE = '+02:00'
+TIMEZONE              = '+02:00'
 
 # Salary Configurtions
-SHOW_SALARY		= False
-SALARY			= 0
+SHOW_SALARY           = False
+SALARY                = 0
 
