@@ -5,9 +5,6 @@ At work, we track our working hours on Toggl (www.toggl.com), so I created this 
 
 You will need to install `requests` and `dateutil` python libraries to be able to use this.
 
-To get started, rename `config.py-example` to `config.py` and edit the values in it. 
-
-Your Toggl  API token can be found in your account's settings.
 
 Setup
 -----
@@ -17,7 +14,10 @@ After downloading the source code, navaigate to the directory and run the follow
 $ pip install -r requirements.txt
 ```
 
-Then copy `config.py-example` to `config.py` and edit the values in it to match your data.
+Then rename `config.py-example` to `config.py` and edit the values in it. 
+
+Your Toggl  API token can be found in your account's settings.
+
 
 Usage
 -----
