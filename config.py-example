@@ -9,6 +9,9 @@ WORKING_HOURS_PER_DAY	= 8
 WORKING_DAYS			= 5
 TOLERANCE_PERCENTAGE	= 0.1
 
+# Timezone
+TIMEZONE = '+02:00'
+
 # Salary Configurtions
 SHOW_SALARY		= False
 SALARY			= 0
