@@ -4,7 +4,6 @@
 
 import sys
 import config
-import traceback
 import requests
 
 from togglapi import api
@@ -33,13 +32,12 @@ def main():
         print "Good Bye Cruel World!"
         sys.exit()
     print "Internet seems fine!"
-    print "I am trying to connect to Toggl, hang on!\n"
+    print "\nTrying to connect to Toggl, hang on!\n"
     try:
         t.achieved_hours = a.get_hours_tracked(start_date=w.month_start, end_date=w.now)
     except:
         print "OMG! Toggle request failed for some mysterious reason!"
         print "Good Bye Cruel World!"
-        print traceback.format_exc()
         sys.exit()
 
     t.required_hours = w.required_hours_this_month
