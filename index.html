@@ -46,17 +46,24 @@
 
 <p>At work, we track our working hours on Toggl (www.toggl.com), so I created this small project to calculate how many hours I should work to achieve my monthly goals.</p>
 
-<h3>
-<a name="quick-setup" class="anchor" href="#quick-setup"><span class="octicon octicon-link"></span></a>Quick Setup</h3>
-
-<p>
-	<ul>
-		<li>Download the code nd upnack it </li>
-		<li>Make sure <code>requests</code> and <code>dateutil</code> are installed</li>
-		<li>Navigate to the code directory</li>
-		<li>Copy <code>config.py-example</code> to <code>config.py</code> and edit the values in it to match your data.</li>
-	</ul>
-</p>
+<h3>Installation on Windows</h3>
+<ul>
+  <li>If you don't have Python installed, then you must install Python 2.7 from <a href="http://python.org/ftp/python/2.7.5/python-2.7.5.msi">here</a></li>
+  <li>Download the file <a href="http://python-distribute.org/distribute_setup.py"></a></li>
+  <li>Press the start button, select run, and run <code>cmd.exe</code></li>
+  <li>
+    In the command shell, run these commands
+    <pre><code>python distribute_setup.py
+easy_install pip
+pip install python-dateutil requests</code></pre>
+  </li>
+  <li>
+    Download toggl_target from <a href="https://github.com/mos3abof/toggl_target/archive/master.zip">here</a>
+  </li>
+  <li>Expand the downloaded zip file, copy <code>config.py-example</code> & paste it as <code>config.py</code> beside <code>run.py</code></li>
+  <li>Change your API key in <code>config.py</code></li>
+  <li>Run <code>python run.py</code> </li>
+</ul>
 
 <h3>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Example Usage</h3>
