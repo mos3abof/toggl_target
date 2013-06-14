@@ -6,17 +6,20 @@ At work, we track our working hours on Toggl (www.toggl.com), so I created this 
 You will need to install `requests` and `dateutil` python libraries to be able to use this.
 
 
-Setup
------
-After downloading the source code, navaigate to the directory and run the following command :
+Intallation on linux
+--------------------
+
+If you are using linux, you most probably have Python already installed on your machine. 
+If not, use your distro's package management system to install Python 2.7
+
+* Downloading the source code from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
+* navaigate to the directory and run the following command to install the required packages :
 
 ```
 $ pip install -r requirements.txt
 ```
 
-Then rename `config.py-example` to `config.py` and edit the values in it. 
-
-Your Toggl  API token can be found in your account's settings.
+* Rename `config.py-example` to `config.py` and edit the values in it. Your Toggl  API token can be found in your Toggl account's settings.
 
 Installation on Windows
 -----------------------
@@ -34,7 +37,7 @@ pip install python-dateutil requests
 
 * Download toggl_target from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
 * Expand the downloaded zip file, copy `config.py-example` & paste it as `config.py` beside `run.py`
-* Change your API key in `config.py`
+* Change your API key in `config.py` Your Toggl  API token can be found in your Toggl account's settings.
 * Run `python run.py`
 
 Usage
