@@ -18,6 +18,24 @@ Then rename `config.py-example` to `config.py` and edit the values in it.
 
 Your Toggl  API token can be found in your account's settings.
 
+Installation on Windows
+-----------------------
+
+* If you don't have Python installed, then you must install Python 2.7 from [here](http://python.org/ftp/python/2.7.5/python-2.7.5.msi)
+* Download the file
+* Press the start button, select run, and run cmd.exe
+* In the command shell, run these commands
+
+```
+python distribute_setup.py
+easy_install pip
+pip install python-dateutil requests
+```
+
+* Download toggl_target from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
+* Expand the downloaded zip file, copy `config.py-example` & paste it as `config.py` beside `run.py`
+* Change your API key in `config.py`
+* Run `python run.py`
 
 Usage
 -----
