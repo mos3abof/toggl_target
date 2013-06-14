@@ -19,7 +19,9 @@ If not, use your distro's package management system to install Python 2.7
 $ pip install -r requirements.txt
 ```
 
-* Rename `config.py-example` to `config.py` and edit the values in it. Your Toggl  API token can be found in your Toggl account's settings.
+* Rename `config.py-example` to `config.py`
+* In `config.py` add Your Toggl  API token which can be found in your Toggl account's settings.
+* Change other values in `config.py` to match your case
 
 Installation on Windows
 -----------------------
