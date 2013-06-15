@@ -1,3 +1,5 @@
+from dateutil.rrule import SA, SU, MO, TU, WE, TH, FR
+
 # Toggl API Token
 API_TOKEN             = 'ADD YOUR API TOKEN HERE'
 
