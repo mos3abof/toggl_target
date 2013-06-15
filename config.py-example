@@ -6,7 +6,8 @@ PRECISION             = 2
 
 # Target Configurations
 WORKING_HOURS_PER_DAY = 8
-WORKING_DAYS          = 5
+BUSINESS_DAYS         = (SA, SU, MO, TU, WE)
+WEEK_DAYS             = (SA, SU, MO, TU, WE, TH, FR)
 TOLERANCE_PERCENTAGE  = 0.1
 
 # Timezone
