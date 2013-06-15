@@ -6,8 +6,8 @@ At work, we track our working hours on Toggl (www.toggl.com), so I created this 
 You will need to install `requests` and `dateutil` python libraries to be able to use this.
 
 
-Intallation on linux
---------------------
+Installation on linux
+---------------------
 
 If you are using linux, you most probably have Python already installed on your machine. 
 If not, use your distro's package management system to install Python 2.7
