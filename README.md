@@ -78,10 +78,11 @@ To achieve the required :
 So far you have achieved 8.89 % of your target
 ```
 
-Authors and Contributores
--------------------------
+Contributores
+-------------
 
-In June 2013, @mos3abof (http://www.mos3abof.com) started this project and had plenty of help and guidance from @mtayseer (http://www.mtayseer.net).
+* [@mos3abof](http://www.mos3abof.com) 
+* [@mtayseer](http://www.mtayseer.net)
 
 
 Support or Contact
