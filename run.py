@@ -48,7 +48,7 @@ def main():
     print "So far you have tracked {0:.2f} hours".format(t.achieved_hours)
     print "\nBusiness days left till deadline : {}".format(w.business_days_left_count)
     print "Total days left till deadline : {}".format(w.days_left_count)
-    print "\nRquired working hours for this month : {}".format(w.required_hours_this_month)
+    print "\nRequired working hours for this month : {}".format(w.required_hours_this_month)
     print "\nTo achieve the minimum :\n\tyou should log {0:.2f} hours every business day".format(normal_min_hours)
     print "\tor log {0:.2f} hours every day".format(crunch_min_hours)
 
