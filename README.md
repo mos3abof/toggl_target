@@ -58,24 +58,26 @@ Hi
 Checking Internet connectivity...
 Internet seems fine!
 
-I am trying to connect to Toggl, hang on!
+Trying to connect to Toggl, hang on!
 
-So far you have tracked 15.65 hours
+So far you have tracked 96.45 hours
 
-Business days left till deadline : 18
-Total days left till deadline : 26
+Business days left till deadline : 1
+Total days left till deadline : 3
 
-Rquired working hours for this month : 176
+Required working hours for this month : 176
 
 To achieve the minimum :
-    you should log 7.93 hours every business day 
-    or log 5.49 hours every day
+    you should log 61.95 hours every business day
+    or log 20.65 hours every day
 
 To achieve the required :
-    you should log 8.91 hours every business day 
-    or log 6.17 hours every day
+    you should log 79.55 hours every business day
+    or log 26.52 hours every day
 
-So far you have achieved 8.89 % of your target
+So far you have achieved:
+
+54.80% [===================================----------------------|------]
 ```
 
 Contributores
