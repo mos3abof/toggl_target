@@ -9,7 +9,7 @@ You will need to install `requests` and `dateutil` python libraries to be able t
 Installation on linux
 ---------------------
 
-If you are using linux, you most probably have Python already installed on your machine. 
+If you are using linux, you most probably have Python already installed on your machine.
 If not, use your distro's package management system to install Python 2.7
 
 * Downloading the source code from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
@@ -60,30 +60,30 @@ Internet seems fine!
 
 Trying to connect to Toggl, hang on!
 
-So far you have tracked 96.45 hours
+So far you have tracked 120.00 hours
 
-Business days left till deadline : 1
-Total days left till deadline : 3
+Business days left till deadline : 7
+Total days left till deadline : 10
 
-Required working hours for this month : 176
+Required working hours for this month : 170
 
 To achieve the minimum :
-    you should log 61.95 hours every business day
-    or log 20.65 hours every day
+    you should log 4.00 hours every business day
+    or log 3.00 hours every day
 
 To achieve the required :
-    you should log 79.55 hours every business day
-    or log 26.52 hours every day
+    you should log 7.00 hours every business day
+    or log 5.0 hours every day
 
 So far you have achieved:
 
-54.80% [===================================----------------------|------]
+70.59% [=================================================--------------|------]
 ```
 
 Contributores
 -------------
 
-* [@mos3abof](http://www.mos3abof.com) 
+* [@mos3abof](http://www.mos3abof.com)
 * [@mtayseer](http://www.mtayseer.net)
 
 
