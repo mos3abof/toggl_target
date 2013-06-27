@@ -109,7 +109,7 @@ def main():
     print "\nTo achieve the required :\n\tyou should log {0:.2f} hours every business day".format(normal_required_hours)
     print "\tor log {0:.2f} hours every day".format(crunch_required_hours)
     print "\tleft is : {0:.2f}".format(w.required_hours_this_month - t.achieved_hours)
-    print "\nSo far you have achieved:\n"
+    print "\nHow your progress looks:"
     bar = percentile_bar(t.achieved_percentage, config.TOLERANCE_PERCENTAGE)
     print bar
 
