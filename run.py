@@ -54,17 +54,16 @@ def getTerminalSize():
 def percentile_bar(percentage, tolerance):
     (width, height) = getTerminalSize()
 
-    # progress_units        = int((0.8 * width))
     progress_units        = width - 10
     achieved_units        = int(percentage * progress_units)
     remaining_units       = int(progress_units - achieved_units)
-    minimum_mark_position = int(progress_units - tolerance * progress_units)
+    mark_pos = int(progress_units - tolerance * progress_units)
 
     progress_bar = "{}{}".format("=" * achieved_units, "-" * remaining_units)
 
     percentile_bar = "{0:.2f}% ".format(percentage * 100)
     if tolerance > 0:
-        percentile_bar += "[{}]".format(progress_bar[0:minimum_mark_position] + "|" + progress_bar[minimum_mark_position+1:])
+        percentile_bar += "[{}]".format(progress_bar[0:mark_pos] + "|" + progress_bar[mark_pos+1:])
     else:
         percentile_bar += "[{}]".format(progress_bar)
 
