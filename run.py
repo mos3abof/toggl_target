@@ -70,6 +70,19 @@ def percentile_bar(percentage, tolerance):
     return percentile_bar
 
 
+def hilite(string, status, bold):
+    attr = []
+    if status:
+        # green
+        attr.append('32')
+    else:
+        # red
+        attr.append('31')
+    if bold:
+        attr.append('1')
+    return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), string)
+
+
 def main():
     w = workingtime.WorkingTime(config.WORKING_HOURS_PER_DAY, config.BUSINESS_DAYS, config.WEEK_DAYS)
     a = api.TogglAPI(config.API_TOKEN, config.TIMEZONE)
@@ -95,7 +108,8 @@ def main():
 
     normal_min_hours, crunch_min_hours = t.get_minimum_daily_hours(w.business_days_left_count, w.days_left_count)
 
-    print "So far you have tracked {0:.2f} hours".format(t.achieved_hours)
+    print "So far you have tracked",
+    print hilite("{0:.2f} hours".format(t.achieved_hours), True, True)
     print "\nBusiness days left till deadline : {}".format(w.business_days_left_count)
     print "Total days left till deadline : {}".format(w.days_left_count)
     print "\nThis month targets [Required (minimum)] : {} ({})".format(w.required_hours_this_month, w.required_hours_this_month - (w.required_hours_this_month * config.TOLERANCE_PERCENTAGE))
