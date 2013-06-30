@@ -28,13 +28,13 @@ class Target(object):
         return self.achieved_hours / self.required_hours
 
     def get_required_daily_hours(self, business_days, days):
-        normal_hours = self.left_to_required / business_days
-        crunch_hours = self.left_to_required / days
+        normal_hours = self.left_to_required / max(business_days, 1)
+        crunch_hours = self.left_to_required / max(days, 1)
         return (normal_hours, crunch_hours)
 
     def get_minimum_daily_hours(self, business_days, days):
-        normal_hours = self.left_to_minimum / business_days
-        crunch_hours = self.left_to_minimum / days
+        normal_hours = self.left_to_minimum / max(business_days, 1)
+        crunch_hours = self.left_to_minimum / max(days, 1)
         return (normal_hours, crunch_hours)
 
 
