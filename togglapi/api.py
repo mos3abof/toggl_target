@@ -25,7 +25,8 @@ class TogglAPI(object):
         'https://www.toggl.com/api/v8/time_entries'
 
         >>> t = TogglAPI('_SECRET_TOGGLE_API_TOKEN_')
-        >>> t._make_url(section='time_entries', params = {'start_date' : '2010-02-05T15:42:46+02:00', 'end_date' : '2010-02-12T15:42:46+02:00'})
+        >>> t._make_url(section='time_entries', 
+                        params = {'start_date': '2010-02-05T15:42:46+02:00', 'end_date': '2010-02-12T15:42:46+02:00'})
         'https://www.toggl.com/api/v8/time_entries?start_date=2010-02-05T15%3A42%3A46%2B02%3A00%2B02%3A00&end_date=2010-02-12T15%3A42%3A46%2B02%3A00%2B02%3A00'
         """
 
@@ -49,14 +50,17 @@ class TogglAPI(object):
 
     ## Time Entry functions
     def get_time_entries(self, start_date='', end_date='', timezone=''):
-        """Get Time Entries JSON object from Toggl"""
+        """Get Time Entries JSON object from Toggl within a given start_date and an end_date with a given timezone"""
 
-        url = self._make_url(section='time_entries', params={'start_date': start_date+self.timezone, 'end_date': end_date+self.timezone})
+        url = self._make_url(section='time_entries', 
+                             params={'start_date': start_date+self.timezone, 'end_date': end_date+self.timezone})
         r = self._query(url=url, method='GET')
         return r.json()
 
     def get_hours_tracked(self, start_date, end_date):
-        """Count the total tracked hours excluding any RUNNING real time tracked time entries"""
+        """Count the total tracked hours within a given start_date and an end_date
+        excluding any RUNNING real time tracked time entries
+        """
         time_entries = self.get_time_entries(start_date=start_date.isoformat(), end_date=end_date.isoformat())
 
         if time_entries is None:
