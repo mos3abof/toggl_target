@@ -23,7 +23,7 @@ def get_month_end(time):
     return next_month_start - timedelta(seconds=1)
 
 
-def dump(dump_dir, year, month, verbose=False):
+def dump(dump_dir, year, month, pretty_json=False, verbose=False):
     time = datetime(year=year, month=month, day=1)
     month_start = get_month_start(time)
     month_end = get_month_end(time)
@@ -33,7 +33,11 @@ def dump(dump_dir, year, month, verbose=False):
         print month_start.isoformat(), 'to', month_end.isoformat(), '...'
     toggl = api.TogglAPI(API_TOKEN, TIMEZONE)
     data = toggl.get_time_entries(month_start.isoformat(), month_end.isoformat())
-    content = json.dumps(data)
+    if pretty_json:
+        content = json.dumps(data, sort_keys=True, indent=1,
+                             separators=(',', ': '))
+    else:
+        content = json.dumps(data)
     if not os.path.exists(dump_dir):
         os.makedirs(dump_dir)
     filename = os.path.join(dump_dir, '%s.json' % month)
@@ -51,24 +55,28 @@ def dump(dump_dir, year, month, verbose=False):
     return data
 
 
-def backup(backup_dir, verbose=False):
+def backup(backup_dir, start_month, pretty_json=False, verbose=False):
     time = datetime.now()
     while True:
         month = '%d-%02d' % (time.year, time.month)
-        if month < START_MONTH:
+        if month < start_month:
             break
-        dump(backup_dir, time.year, time.month, verbose=verbose)
+        dump(backup_dir, time.year, time.month, pretty_json=pretty_json,
+             verbose=verbose)
         prev_month = (time - timedelta(days=31)).replace(day=1)
         time = prev_month
 
 if __name__ == '__main__':
-    import sys
-    if len(sys.argv) == 1:
-        print 'Usage: %s backup_dir [-v]' % sys.argv[0]
-        sys.exit(1)
-    try:
-        verbose = sys.argv[2] == '-v'
-    except:
-        verbose = False
-    backup_dir = sys.argv[1]
-    backup(backup_dir, verbose=verbose)
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('backup_dir')
+    parser.add_argument('-v', '--verbose', help='output verbosity',
+                        action='store_true')
+    parser.add_argument('-p', '--pretty-json',
+                        help='save pretty printed JSON, read and diff friendly',
+                        action='store_true')
+    parser.add_argument('-m', '--start_month', default=START_MONTH,
+                        help='backup from START_MONTH, default %r' % START_MONTH)
+    args = parser.parse_args()
+    backup(args.backup_dir, start_month=args.start_month,
+           pretty_json=args.pretty_json, verbose=args.verbose)
