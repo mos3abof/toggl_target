@@ -4,6 +4,7 @@
 import hashlib
 import json
 import os
+import re
 from datetime import datetime, timedelta
 
 from togglapi import api
@@ -35,7 +36,8 @@ def dump(dump_dir, year, month, pretty_json=False, verbose=False):
     data = toggl.get_time_entries(month_start.isoformat(), month_end.isoformat())
     if pretty_json:
         content = json.dumps(data, sort_keys=True, indent=1,
-                             separators=(',', ': '))
+                             ensure_ascii=False, separators=(',', ': '))
+        content = content.encode('utf8')
     else:
         content = json.dumps(data)
     if not os.path.exists(dump_dir):
