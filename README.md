@@ -12,24 +12,23 @@ Installation on linux
 If you are using linux, you most probably have Python already installed on your machine.
 If not, use your distro's package management system to install Python 2.7
 
-* Downloading the source code from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
-* navaigate to the directory and run the following command to install the required packages :
+* Download and extract the source code from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
+* Navigate to the extracted directory and run the following command to install the required packages :
 
 ```
 $ pip install -r requirements.txt
 ```
 
 * Copy `config.py-example` to `config.py`
-* In `config.py` add Your Toggl  API token which can be found in your Toggl account's settings.
+* In `config.py` add your Toggl API token, which can be found in your Toggl account's settings.
 * Change other values in `config.py` to match your case
 
 Installation on Windows
 -----------------------
 
 * If you don't have Python installed, then you must install Python 2.7 from [here](http://python.org/ftp/python/2.7.5/python-2.7.5.msi)
-* Download the file
-* Press the start button, select run, and run cmd.exe
-* In the command shell, run these commands
+* Open the Windows command shell
+* In the command shell, run the following commands
 
 ```
 python distribute_setup.py
@@ -38,7 +37,7 @@ pip install python-dateutil requests
 ```
 
 * Download toggl_target from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
-* Expand the downloaded zip file, copy `config.py-example` & paste it as `config.py` beside `run.py`
+* Extract the downloaded zip file, copy `config.py-example` & paste it as `config.py` beside `run.py`
 * Change your API key in `config.py` Your Toggl  API token can be found in your Toggl account's settings.
 * Run `python run.py`
 
