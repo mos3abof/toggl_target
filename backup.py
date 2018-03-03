@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf8
+# @author Mosab Ibrahim <mosab.a.ibrahim@gmail.com>
 
 import hashlib
 import json
@@ -29,8 +30,8 @@ def dump(dump_dir, year, month, verbose=False):
     month_end = get_month_end(time)
     month = '%d-%02d' % (year, month)
     if verbose:
-        print month + ':',
-        print month_start.isoformat(), 'to', month_end.isoformat(), '...'
+        print(month + ':',)
+        print(month_start.isoformat(), 'to', month_end.isoformat(), '...')
     toggl = api.TogglAPI(API_TOKEN, TIMEZONE)
     data = toggl.get_time_entries(month_start.isoformat(), month_end.isoformat())
     content = json.dumps(data)
@@ -43,11 +44,11 @@ def dump(dump_dir, year, month, verbose=False):
 
     if os.path.exists(filename) and md5(content) == md5(open(filename).read()):
         if verbose:
-            print filename, 'not changed.'
+            print(filename, 'not changed.')
     else:
         file(filename, 'w').write(content)
         if verbose:
-            print filename, 'saved.'
+            print(filename, 'saved.')
     return data
 
 
@@ -64,7 +65,7 @@ def backup(backup_dir, verbose=False):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) == 1:
-        print 'Usage: %s backup_dir [-v]' % sys.argv[0]
+        print('Usage: %s backup_dir [-v]' % sys.argv[0])
         sys.exit(1)
     try:
         verbose = sys.argv[2] == '-v'

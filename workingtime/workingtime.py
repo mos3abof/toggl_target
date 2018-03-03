@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-#@author Mosab Ahmad <mosab.ahmad@gmail.com>
+# @author Mosab Ibrahim <mosab.a.ibrahim@gmail.com>
 
 from dateutil.rrule import rrule, DAILY
 from dateutil.relativedelta import relativedelta
@@ -9,10 +9,11 @@ from datetime import datetime
 
 class WorkingTime(object):
     """Time and date calculations for working hours and days"""
+
     def __init__(self, daily_hours, BUSINESS_DAYS, WEEK_DAYS):
-        self.daily_hours    = daily_hours
-        self.BUSINESS_DAYS  = BUSINESS_DAYS
-        self.WEEK_DAYS      = WEEK_DAYS
+        self.daily_hours = daily_hours
+        self.BUSINESS_DAYS = BUSINESS_DAYS
+        self.WEEK_DAYS = WEEK_DAYS
 
     @property
     def now(self):
@@ -56,6 +57,8 @@ class WorkingTime(object):
     def required_hours_this_month(self):
         return self.total_business_days_count * self.daily_hours
 
+
 if __name__ == '__main__':
     import doctest
+
     doctest.testmod()

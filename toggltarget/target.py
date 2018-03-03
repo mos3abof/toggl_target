@@ -1,7 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-#@author Mosab Ahmad <mosab.ahmad@gmail.com>
-
+# @author Mosab Ibrahim <mosab.a.ibrahim@gmail.com>
 
 class Target(object):
     """Calculate the actual target achievments"""
@@ -40,4 +39,5 @@ class Target(object):
 
 if __name__ == '__main__':
     import doctest
+
     doctest.testmod()

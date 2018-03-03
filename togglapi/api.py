@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-#@author Mosab Ahmad <mosab.ahmad@gmail.com>
+# @author Mosab Ibrahim <mosab.a.ibrahim@gmail.com>
 
 import requests
 
-from urllib import urlencode
+from urllib.parse import urlencode
 from requests.auth import HTTPBasicAuth
 
 
@@ -13,7 +13,7 @@ class TogglAPI(object):
 
     def __init__(self, api_token, timezone):
         self.api_token = api_token
-        self.timezone  = timezone
+        self.timezone = timezone
 
     def _make_url(self, section='time_entries', params={}):
         """Constructs and returns an api url to call with the section of the API to be called
@@ -48,12 +48,12 @@ class TogglAPI(object):
         else:
             raise ValueError('Undefined HTTP method "{}"'.format(method))
 
-    ## Time Entry functions
+    # Time Entry functions
     def get_time_entries(self, start_date='', end_date='', timezone=''):
         """Get Time Entries JSON object from Toggl within a given start_date and an end_date with a given timezone"""
 
-        url = self._make_url(section='time_entries', 
-                             params={'start_date': start_date+self.timezone, 'end_date': end_date+self.timezone})
+        url = self._make_url(section='time_entries',
+                             params={'start_date': start_date + self.timezone, 'end_date': end_date + self.timezone})
         r = self._query(url=url, method='GET')
         return r.json()
 
@@ -73,4 +73,5 @@ class TogglAPI(object):
 
 if __name__ == '__main__':
     import doctest
+
     doctest.testmod()
