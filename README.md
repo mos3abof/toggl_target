@@ -81,6 +81,18 @@ So far you have achieved:
 70.59% [=================================================--------------|------]
 ```
 
+You can also filter by workspace name's (-w / --workspace), client's name (-c / --client) or project's name (-p / --project), using the following command :
+
+```
+$ python run.py -w Work
+```
+
+Optionally, you can choose a number of days (-d / --days) left to reach your target, and see the remaining number of hours per day, using the following command :
+
+```
+$ python run.py -w Work -d 10
+```
+
 Contributores
 -------------
 
