@@ -12,13 +12,13 @@ Installation on linux
 ---------------------
 
 If you are using linux, you most probably have Python already installed on your machine.
-If not, use your distro's package management system to install Python 2.7
+If not, use your distro's package management system to install Python 3
 
 * Download and extract the source code from [here](https://github.com/mos3abof/toggl_target/archive/master.zip)
 * Navigate to the extracted directory and run the following command to install the required packages :
 
 ```
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 
 * Copy `config.py-example` to `config.py`
