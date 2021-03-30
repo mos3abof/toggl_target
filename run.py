@@ -108,7 +108,7 @@ def main():
 
     normal_min_hours, crunch_min_hours = t.get_minimum_daily_hours(w.business_days_left_count, w.days_left_count)
 
-    print("So far you have tracked", )
+    print("So far this month, you have tracked", )
     print(hilite("{0:.2f} hours".format(t.achieved_hours), True, True))
     print("\nBusiness days left till deadline : {}".format(w.business_days_left_count))
     print("Total days left till deadline : {}".format(w.days_left_count))
